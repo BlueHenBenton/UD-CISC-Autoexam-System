@@ -23,4 +23,10 @@ async function tarQuestion(questionPath, outDir) {
   return outFile;
 }
 
-tarQuestion('./sample-question', 'out').then(path => console.log(`Created ${path}`));
+// CLI: Not necessary, but convenient for now.
+if (process.argv.length < 3 || process.argv.length > 4) {
+  console.log('Please provide 1-2 arguments.');
+  return;
+}
+
+tarQuestion(process.argv[2], process.argv[3] || 'out').then(path => console.log(`Created ${path}`));
