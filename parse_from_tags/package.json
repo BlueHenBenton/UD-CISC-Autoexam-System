@@ -1,0 +1,15 @@
+{
+  "name": "parse_from_tags",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/xml2js": "^0.4.3",
+    "xml2js": "^0.4.19"
+  }
+}
