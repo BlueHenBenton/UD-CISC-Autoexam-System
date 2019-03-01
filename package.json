@@ -1,0 +1,22 @@
+{
+  "name": "autoexam-system",
+  "version": "1.0.0",
+  "description": "The import function of the autoexam system for UD CISC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlueHenBenton/UD-CISC-Autoexam-System.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BlueHenBenton/UD-CISC-Autoexam-System/issues"
+  },
+  "homepage": "https://github.com/BlueHenBenton/UD-CISC-Autoexam-System#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
