@@ -1,0 +1,23 @@
+{
+  "name": "475-group-nine",
+  "version": "1.0.0",
+  "description": "CISC autoexam system",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlueHenBenton/UD-CISC-Autoexam-System.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BlueHenBenton/UD-CISC-Autoexam-System/issues"
+  },
+  "homepage": "https://github.com/BlueHenBenton/UD-CISC-Autoexam-System#readme"
+}
