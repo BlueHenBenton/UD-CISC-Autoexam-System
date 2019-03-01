@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/mkdirp": "^0.5.2",
     "@types/tar": "^4.0.0",
+    "mkdirp": "^0.5.1",
     "tar": "^4.4.8"
   }
 }

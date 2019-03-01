@@ -1,6 +1,10 @@
 const tar = require('tar');
+const mkdirp = require('mkdirp');
 
 async function untar(inPath, outPath) {
+  mkdirp(outPath, (err) => {
+    if (err) throw err;
+  });
   await tar.x({
     file: inPath,
     C: outPath
