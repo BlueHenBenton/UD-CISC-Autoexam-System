@@ -1,3 +1,5 @@
+const { TestController } = require('./controllers');
+
 module.exports = function(app) {
-  app.get('/test', (req, res) => res.json({status: 'ok'}));
+  app.get('/test', TestController.test)
 }
