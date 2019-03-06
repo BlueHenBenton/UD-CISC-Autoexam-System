@@ -6,6 +6,7 @@ async function parseAndSaveMbz(req, res) {
   const dir = await awaitTemp.mkdir();
   await fs.writeFile(dir + '/upload.mbz', req.body);
   await del(dir + '/**', { force: true });
+  throw new Error('blah');
   res.send(dir);
 }
 
