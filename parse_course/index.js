@@ -36,18 +36,16 @@ async function parseTags(pathToQuestion) {
   // Make sure we can find out tags.
   if(!xml) throw new Error('Failed to parse xml.');
   if(!xml.course) throw new Error('XML root element isn\'t <module>.');
+  if(!xml.course.$.id) throw new Error('Cannot find course id in <module>.');
   if(!xml.course.fullname[0]) throw new Error('Cannot find course name in <module>.');
-  if(!xml.course.shortname[0]) throw new Error('Cannot find course name in <module>.');
   
-  //if(!xml.module.shortname) throw new Error('Cannot find any \'tags\' element in <module>.');
-
+  //Get id
+  const id = xml.course.$.id;
   // full name
   const name = xml.course.fullname[0];
-  // short name
-  const shortname = xml.course.shortname[0];
   // Course name
   const coursename = name.substr(0, 7);
-  return { course: coursename, fullName:name, shortName:shortname };
+  return { course_id: id, course_name:coursename };
 }
 
 
