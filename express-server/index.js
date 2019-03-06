@@ -1,11 +1,10 @@
 const express = require('express');
+const router = require('./router');
 
 const port = 2468;
 
 const app = express();
-
-app.get('/test', (req, res) => res.json({status: 'ok'}));
-
+router(app);
 app.listen(port);
 
 console.log(`Listening on ${port}...`);
