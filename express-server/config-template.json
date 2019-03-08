@@ -1,3 +1,4 @@
 {
-  "port": 2468
+  "port": 2468,
+  "saveDirectory": "/var/autoexam"
 }
