@@ -1,5 +1,7 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
-if(!fs.existsSync('./config.json')) {
+if(!fs.existsSync('/etc/autoexam/config.json')) {
   console.error('Cannot find config.json. If you don\'t have it, create it by copying config-template.json and changing the values.');
   console.error('Aborting.');
   process.exit(1);

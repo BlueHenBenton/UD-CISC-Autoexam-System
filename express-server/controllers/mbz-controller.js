@@ -1,7 +1,7 @@
 const awaitTemp = require('../utilities/await-temp');
 const fs = require('fs-extra'); // like node's 'fs', but with more methods and *promise support*.
 const del = require('del');
-const config = require('../config.json');
+const config = require('/etc/autoexam/config.json');
 const extractMbz = require('../utilities/extract-mbz');
 const parseMetaFromTags = require('../utilities/parse-meta-from-tags');
 const parseCourse = require('../utilities/parse-course');
@@ -19,7 +19,7 @@ async function parseAndSaveMbz(req, res) {
   // Create an array of promises that all result in question metadata
   const questionMetaPromises = questions.map(async (question) => {
     // Tar this question and put it in the permanent storage
-    await tarQuestion(`${dir}/extracted/activities/${question}`, config.saveDirectory);
+    await tarQuestion(`${dir}/extracted/activities/${question}`, config.saveDirectory + '/activities');
 
     return {
       path: question,
