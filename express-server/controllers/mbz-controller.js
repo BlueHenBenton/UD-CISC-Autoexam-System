@@ -1,7 +1,7 @@
 const awaitTemp = require('../utilities/await-temp');
 const fs = require('fs-extra'); // like node's 'fs', but with more methods and *promise support*.
 const del = require('del');
-const config = require('/etc/autoexam/config.json');
+const config = require('../utilities/config');
 const extractMbz = require('../utilities/extract-mbz');
 const parseMetaFromTags = require('../utilities/parse-meta-from-tags');
 const parseCourse = require('../utilities/parse-course');
