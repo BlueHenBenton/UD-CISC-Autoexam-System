@@ -18,6 +18,7 @@
 - To update the server after an update, run `sudo make reinstall-server`.
 - To uninstall the server, run `sudo make uninstall-server`.
 - The server can be controlled with systemctl with the unit `autoexamd` (or `autoexamd.service`).
+  - The server status can be viewed with `sudo systemctl status autoexamd`
   - The server can be stopped with `sudo systemctl stop autoexamd`
   - The server can be started with `sudo systemctl start autoexamd`
   - The server output can be viewed with `sudo journalctl -u autoexamd`
