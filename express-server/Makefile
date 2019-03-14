@@ -13,3 +13,6 @@ uninstall-server:
 	rm -f /lib/systemd/system/autoexamd.service
 	-systemctl daemon-reload
 	npm uninstall -g
+
+.PHONY: reinstall-server
+reinstall-server: uninstall-server install-server
