@@ -8,5 +8,13 @@ if(!fs.existsSync(configPath)) {
   console.error('Aborting.');
   process.exit(1);
 }
+// Make sure we have read access
+try {
+  fs.accessSync(configPath, fs.constants.R_OK);
+} catch(e) {
+  console.log('Config file exists, but cannot be read. Do you have access?');
+  process.exit(2);
+}
+
 module.exports = require(configPath);
 
