@@ -1,0 +1,13 @@
+[Unit]
+Description=autoexamd
+After=mongodb.service
+
+[Service]
+ExecStart=/usr/local/bin/autoexamd
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=autoexamd
+
+[Install]
+WantedBy=multi-user.target
+Alias=autoexamd.service

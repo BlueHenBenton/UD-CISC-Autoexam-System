@@ -1,14 +1,9 @@
-const fs = require('fs');
-if(!fs.existsSync('./config.json')) {
-  console.error('Cannot find config.json. If you don\'t have it, create it by copying config-template.json and changing the values.');
-  console.error('Aborting.');
-  process.exit(1);
-}
+#!/usr/bin/env node
 
 const express = require('express');
 const router = require('./router');
 
-const config = require('./config.json');
+const config = require('./utilities/config');
 
 const port = config.port;
 
