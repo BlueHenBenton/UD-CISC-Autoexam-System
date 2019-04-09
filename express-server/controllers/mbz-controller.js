@@ -6,6 +6,7 @@ const extractMbz = require('../utilities/extract-mbz');
 const parseMetaFromTags = require('../utilities/parse-meta-from-tags');
 const parseCourse = require('../utilities/parse-course');
 const tarQuestion = require('../utilities/tar-question');
+const encodeQuestion = require('../utilities/encode-question');
 
 async function parseAndSaveMbz(req, res) {
   // Create a temporary directory
@@ -16,6 +17,7 @@ async function parseAndSaveMbz(req, res) {
   await extractMbz(dir + '/upload.mbz', dir + '/extracted');
   // What questions are here?
   const questions = await fs.readdir(dir + '/extracted/activities');
+  /*
   // Create an array of promises that all result in question metadata
   const questionMetaPromises = questions.map(async (question) => {
     // Tar this question and put it in the permanent storage
@@ -40,6 +42,16 @@ async function parseAndSaveMbz(req, res) {
   await del(dir, { force: true });
   // Send the response
   res.send(response);
+  */
+
+  // Get an array of promises to question data
+  const questionDataPromises = questions.map(question => encodeQuestion((`${dir}/extracted/activities/${question}`)));
+  // Await all the promises to actually get the question data. This runs them all in parallel.
+  const questionData = await Promise.all(questionDataPromises);
+  // Remove the temporary directory
+  await del(dir, { force: true });
+  // Return the question data
+  res.json(questionData);
 }
 
 module.exports = {
