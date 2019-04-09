@@ -1,13 +1,23 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const xml2json = require('xml2json');
 
 module.exports = async function encodeQuestion(dir) {
-    return {
-        'grade_history.xml': xml2json.toJson(fs.readFileSync(`${dir}/grade_history.xml`).toString(), { object: true, reversible: true }),
-        'grades.xml': xml2json.toJson(fs.readFileSync(`${dir}/grades.xml`).toString(), { object: true, reversible: true }),
-        'inforef.xml': xml2json.toJson(fs.readFileSync(`${dir}/inforef.xml`).toString(), { object: true, reversible: true }),
-        'module.xml': xml2json.toJson(fs.readFileSync(`${dir}/module.xml`).toString(), { object: true, reversible: true }),
-        'roles.xml': xml2json.toJson(fs.readFileSync(`${dir}/roles.xml`).toString(), { object: true, reversible: true }),
-        'vpl.xml': xml2json.toJson(fs.readFileSync(`${dir}/vpl.xml`).toString(), { object: true, reversible: true })
-    }
+    // What files are there?
+    const files = await fs.readdir(dir);
+    // Set up an object to contain out return.
+    const ret = {};
+    // Asynchronously run a function for each file.
+    await Promise.all(files.map(async (file) => {
+        const path = dir + '/' + file;
+        // If it's a file...
+        if ((await fs.stat(path)).isFile()) {
+            // Put the right thing in the ret object.
+            if (file.endsWith('.xml'))
+                ret[file] = xml2json.toJson(await fs.readFile(path), { object: true, reversible: true });
+            else
+                ret[file] = await fs.readFile(path);
+        }
+    }));
+    // All the promises are done. We can return.
+    return ret;
 }
