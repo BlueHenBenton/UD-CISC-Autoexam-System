@@ -16,6 +16,8 @@ module.exports = async function encodeQuestion(dir) {
                 ret[file] = xml2json.toJson(await fs.readFile(path), { object: true, reversible: true });
             else
                 ret[file] = await fs.readFile(path);
+        } else {
+            console.warn(`Warning: ignoring directory ${file} in ${dir}.`);
         }
     }));
     // All the promises are done. We can return.
