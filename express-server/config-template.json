@@ -1,6 +1,6 @@
 {
   "port": 2468,
   "saveDirectory": "storage/activities",
-  "dbName": "myawesomedb",
-  "questionsCollection": "myawesomecollection"
+  "dbName": "autoexam",
+  "questionsCollection": "questions"
 }
