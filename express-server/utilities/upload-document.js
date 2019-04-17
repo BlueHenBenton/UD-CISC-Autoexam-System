@@ -1,9 +1,10 @@
 var mongo = require('mongodb');
+const config = require('../utilities/config');
 
 // This is the name of the mongo database.
-const DBNAME = "group9db";
+const DBNAME = config.dbName || 'group9db';
 // This is the name of the collection within the database
-const COLLECTIONNAME = "questions";
+const COLLECTIONNAME = config.questionsCollection || "questions";
 
 var MongoClient = require('mongodb').MongoClient;
 // The port and location that mongo is using on the network
