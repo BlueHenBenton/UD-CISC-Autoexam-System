@@ -10,16 +10,19 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 
 module.exports = function uploadDocuments(documents){
-    // Connect to the running Mongo instance
-    MongoClient.connect(url, function(err, db){
-        if(err) throw err;
-        // Connect to the proper database
-        var dbo = db.db(DBNAME);
-        // Insert the documents into the collection
-        dbo.collection(COLLECTIONNAME).insertMany(documents, function(err, res){
-            if (err) throw err;
-            console.log("Inserted Documents");
-            db.close();
+    return new Promise((resolve, reject) => {
+        // Connect to the running Mongo instance
+        MongoClient.connect(url, function(err, db){
+            if(err) reject(err);
+            // Connect to the proper database
+            var dbo = db.db(DBNAME);
+            // Insert the documents into the collection
+            dbo.collection(COLLECTIONNAME).insertMany(documents, function(err, res){
+                if (err) reject(err);
+                console.log("Inserted Documents");
+                db.close();
+                resolve();
+            });
         });
     });
 }
