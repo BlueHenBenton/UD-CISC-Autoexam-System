@@ -7,6 +7,9 @@ const parseMetaFromTags = require('../utilities/parse-meta-from-tags');
 const parseCourse = require('../utilities/parse-course');
 const tarQuestion = require('../utilities/tar-question');
 const encodeQuestion = require('../utilities/encode-question');
+const uploadDocuments = require('../utilities/upload-document');
+const { sanitizeObject } = require('../utilities/sanitize-key');
+
 
 async function parseAndSaveMbz(req, res) {
   // Create a temporary directory
@@ -21,6 +24,9 @@ async function parseAndSaveMbz(req, res) {
   const questionDataPromises = questions.map(question => encodeQuestion((`${dir}/extracted/activities/${question}`)));
   // Await all the promises to actually get the question data. This runs them all in parallel.
   const questionData = await Promise.all(questionDataPromises);
+  // Upload the questionData to mongo
+  await uploadDocuments(questionData.map(question => sanitizeObject(question)));
+
   // Remove the temporary directory
   await del(dir, { force: true });
   // Return the question data
