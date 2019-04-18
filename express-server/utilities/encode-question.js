@@ -1,5 +1,14 @@
 const fs = require('fs-extra');
-const xml2json = require('xml2json');
+const xml2js = require('xml2js');
+
+function encode(str) {
+    return new Promise((resolve, reject) => {
+        (new xml2js.Parser()).parseString(str, (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+        });
+    });
+}
 
 module.exports = async function encodeQuestion(dir) {
     // What files are there?
@@ -13,7 +22,7 @@ module.exports = async function encodeQuestion(dir) {
         if ((await fs.stat(path)).isFile()) {
             // Put the right thing in the ret object.
             if (file.endsWith('.xml'))
-                ret[file] = xml2json.toJson(await fs.readFile(path), { object: true, reversible: true });
+                ret[file] = await encode(await fs.readFile(path));
             else
                 ret[file] = await fs.readFile(path);
         } else {

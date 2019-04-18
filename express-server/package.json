@@ -20,8 +20,7 @@
     "@types/mkdirp": "^0.5.2",
     "@types/tar": "^4.0.0",
     "@types/temp": "^0.8.33",
-    "@types/xml2js": "^0.4.3",
-    "@types/xml2json": "^0.10.0",
+    "@types/xml2js": "^0.4.4",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "del": "^4.0.0",
@@ -32,7 +31,6 @@
     "mongodb": "^3.2.3",
     "tar": "^4.4.8",
     "temp": "^0.9.0",
-    "xml2js": "^0.4.19",
-    "xml2json": "^0.11.2"
+    "xml2js": "^0.4.19"
   }
 }
