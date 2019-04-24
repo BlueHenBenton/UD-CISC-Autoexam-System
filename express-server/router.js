@@ -7,7 +7,7 @@ module.exports = function(app) {
   app.use(cors());
   app.post('/mbz', bodyParser.raw({ type: () => true, limit: '15MB' }), asyncHandler(MbzController.parseAndSaveMbz));
   app.get('/tags', asyncHandler(TagController.getTags));
-  app.post('/tags', asyncHandler(TagController.postTag));
+  app.post('/tags', bodyParser.json(), asyncHandler(TagController.postTag));
   app.get('/tag/:tagname', asyncHandler(TagController.getTag));
   app.put('/tag/:tagname', asyncHandler(TagController.putTag));
   app.delete('/tag/:tagname', asyncHandler(TagController.deleteTag));
