@@ -1,7 +1,8 @@
 const { Tag } = require('../models');
 
 async function getTags(req, res) {
-    res.status(500).send('Not implemented.');
+    const result = await Tag.find({}, { name: true }).exec();
+    res.json(result.map(doc => doc.name));
 }
 
 async function getTag(req, res) {
