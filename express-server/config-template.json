@@ -2,5 +2,6 @@
   "port": 2468,
   "saveDirectory": "storage/activities",
   "dbName": "autoexam",
-  "questionsCollection": "questions"
+  "questionsCollection": "questions",
+  "tagsCollection": "tags"
 }
