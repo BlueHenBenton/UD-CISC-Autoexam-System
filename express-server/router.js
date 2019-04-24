@@ -9,6 +9,6 @@ module.exports = function(app) {
   app.get('/tags', asyncHandler(TagController.getTags));
   app.post('/tags', bodyParser.json(), asyncHandler(TagController.postTag));
   app.get('/tags/:tagname', asyncHandler(TagController.getTag));
-  app.put('/tags/:tagname', asyncHandler(TagController.putTag));
+  app.put('/tags/:tagname', bodyParser.json(), asyncHandler(TagController.putTag));
   app.delete('/tags/:tagname', asyncHandler(TagController.deleteTag));
 }
