@@ -1,9 +1,10 @@
 const fs = require('fs'); // This is a library built-in to node for interacting with the filesystem.
 const xml2js = require('xml2js'); // This is a library installed from npm.
-
+const { Tag } = require('../models');
 /** Consumes an xml string, produces a Promise of its content.
  * For info on Promises, see here: https://javascript.info/promise-basics
  */
+
 async function parseXmlStringAsync(string) {
   return new Promise((resolve, reject) => {
     (new xml2js.Parser()).parseString(string, (err, result) => {
@@ -49,7 +50,7 @@ async function parseTags(pathToQuestion) {
   if(!xml.module.tags) throw new Error('Cannot find any \'tags\' element in <module>.');
   if(xml.module.tags.length !== 1) throw new Error('Found multiple \'tags\' elements in <module>.');
   if(!xml.module.tags[0].tag) return []; // No tags are specified, so it didn't even put the property here.
-
+ 
   // We've found tags. Map them to a better format and return.
   return xml.module.tags[0].tag.map(tagxml => {
     // Id
@@ -66,7 +67,17 @@ async function parseTags(pathToQuestion) {
     if(!tagxml.rawname || tagxml.rawname.length !== 1) throw new Error(`Cannot find exactly one rawname on tag ${id}`);
     const rawname = tagxml.rawname[0];
     if(typeof rawname !== 'string') throw new Error(`Tag rawname is not a simple string on tag ${id}.`);
-
+    
+    //make sure tag exists in database
+    var arr = name.split(":");
+    Tag.findOne({ name: arr[0] }, function(err,result) {
+      if(err){
+        console.log("error finding tag",arr[0]);
+      }else{
+        console.log(result);
+      }
+    });
+    
     return { id, name, rawname };
   });
 }

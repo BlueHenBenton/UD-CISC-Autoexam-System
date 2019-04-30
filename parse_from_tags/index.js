@@ -1,6 +1,5 @@
 const fs = require('fs'); // This is a library built-in to node for interacting with the filesystem.
 const xml2js = require('xml2js'); // This is a library installed from npm.
-const tag_access = require('../express-server/controllers');
 
 /** Consumes an xml string, produces a Promise of its content.
  * For info on Promises, see here: https://javascript.info/promise-basics
@@ -68,8 +67,8 @@ async function parseTags(pathToQuestion) {
     const rawname = tagxml.rawname[0];
     if(typeof rawname !== 'string') throw new Error(`Tag rawname is not a simple string on tag ${id}.`);
 
-    tag_access.getTags();
-
+    //tag_access.getTags();
+    //console.log(name);
     return { id, name, rawname };
   });
 }
@@ -79,6 +78,7 @@ async function parseTags(pathToQuestion) {
  */
 async function getTagMetadata(pathToQuestion) {
   const tagnames = (await parseTags(pathToQuestion)).map(tag => tag.name);
+  console.log(tagnames);
   return {
     language: findExactlyOneStartingWith(tagnames, 'es language: '),
     cognitiveLevel: findExactlyOneStartingWith(tagnames, 'es cognitive level: '),

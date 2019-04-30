@@ -10,7 +10,6 @@ const encodeQuestion = require('../utilities/encode-question');
 const uploadDocuments = require('../utilities/upload-document');
 const { sanitizeObject } = require('../utilities/sanitize-key');
 
-
 async function parseAndSaveMbz(req, res) {
   // Create a temporary directory
   const dir = await awaitTemp.mkdir();
@@ -26,6 +25,13 @@ async function parseAndSaveMbz(req, res) {
   const questionData = await Promise.all(questionDataPromises);
   // Upload the questionData to mongo
   await uploadDocuments(questionData.map(question => sanitizeObject(question)));
+  
+  //For each vpl in activites forlder, parse tags for validation
+  questions.forEach(function (file, index) {
+    var fromPath = dir + '/extracted/activities/' + file;
+    console.log(fromPath);
+    parseMetaFromTags(fromPath);
+  });
 
   // Remove the temporary directory
   await del(dir, { force: true });
