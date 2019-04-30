@@ -74,7 +74,10 @@ async function parseTags(pathToQuestion) {
       if(err){
         console.log("error finding tag",arr[0]);
       }else{
-        console.log(result);
+        if(!result){
+          console.log("Error: tag not found in database")
+        }
+        //console.log(result);
       }
     });
     

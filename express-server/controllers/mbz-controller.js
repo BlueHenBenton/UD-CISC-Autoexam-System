@@ -29,7 +29,7 @@ async function parseAndSaveMbz(req, res) {
   //For each vpl in activites forlder, parse tags for validation
   questions.forEach(function (file, index) {
     var fromPath = dir + '/extracted/activities/' + file;
-    console.log(fromPath);
+    //console.log(fromPath);
     parseMetaFromTags(fromPath);
   });
 
