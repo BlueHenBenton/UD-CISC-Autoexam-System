@@ -26,7 +26,7 @@ async function createKey(req, res) {
 
 const standardDelete = crudCreator.makeDelete('key');
 async function augmentedDelete(req, res) {
-    if (req.ApiKey === req.params.key) return res.status(409).send(`You can't delete the key you're using.`);
+    if (req.apiKey === req.params.key) return res.status(409).send(`You can't delete the key you're using.`);
     return await standardDelete(req, res);
 }
 
