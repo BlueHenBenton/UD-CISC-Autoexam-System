@@ -20,7 +20,7 @@ module.exports = async function(question) {
     });
 
     // Make sure every required tag is in the document.
-    expectedTags.forEach(expected => {
+    expectedTags.filter(expected => expected.required).forEach(expected => {
         if (actualTags.find(actual => actual.name === expected.name) === undefined) {
             console.warn(`Warning: missing tag: "${expected.name}"`);
         }
