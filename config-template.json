@@ -3,5 +3,6 @@
   "saveDirectory": "storage/activities",
   "dbName": "autoexam",
   "questionsCollection": "questions",
-  "tagsCollection": "tags"
+  "tagsCollection": "tags",
+  "superuserApiKey": "REPLACE_THIS_KEY"
 }
