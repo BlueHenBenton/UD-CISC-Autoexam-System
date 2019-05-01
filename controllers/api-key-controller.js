@@ -8,7 +8,7 @@ async function createKey(req, res) {
     obj.key = "";
 
     const randomChar = () => {
-        // Create [0-9A-Za-z]
+        // Create a character in [0-9A-Za-z]
         let ret = Math.floor(Math.random() * 62) + 48;
         if (ret <= 57) return String.fromCharCode(ret);
         ret += 7;
