@@ -2,7 +2,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const asyncHandler = require('express-async-handler');
 const isValidApiKey = require('./utilities/is-valid-api-key');
-const { MbzController, TagController } = require('./controllers');
+const { MbzController, TagController, ApiKeyController } = require('./controllers');
 
 module.exports = function(app) {
   app.use(cors());
@@ -23,4 +23,7 @@ module.exports = function(app) {
   app.get('/tags/:tagname', asyncHandler(TagController.getTag));
   app.put('/tags/:tagname', bodyParser.json(), asyncHandler(TagController.putTag));
   app.delete('/tags/:tagname', asyncHandler(TagController.deleteTag));
+  app.get('/api-keys', asyncHandler(ApiKeyController.getKeys));
+  app.post('/api-keys', asyncHandler(ApiKeyController.createKey));
+  app.delete('/api-keys/:key', asyncHandler(ApiKeyController.deleteKey));
 }
