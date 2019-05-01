@@ -68,34 +68,8 @@ async function parseTags(pathToQuestion) {
     const rawname = tagxml.rawname[0];
     if(typeof rawname !== 'string') throw new Error(`Tag rawname is not a simple string on tag ${id}.`);
     
-    //make sure tag exists in database
-    var arr = name.split(":");
-    Tag.findOne({ name: arr[0] }, function(err,result) {
-      if(err){
-        console.log("error finding tag",arr[0]);
-      }else{
-        if(!result){
-          console.log("Error: tag not found in database")
-        }
-        //console.log(result);
-      }
-    });
-    
     return { id, name, rawname };
   });
 }
 
-/** Given a path to a question (activity), find the language, cognitive legel,
- * difficulty, and skill slos from it's tags.
- */
-module.exports = async function(pathToQuestion) {
-  const tagnames = (await parseTags(pathToQuestion)).map(tag => tag.name);
-  return {
-    language: findExactlyOneStartingWith(tagnames, 'es language: '),
-    cognitiveLevel: findExactlyOneStartingWith(tagnames, 'es cognitive level: '),
-    difficulty: findExactlyOneStartingWith(tagnames, 'es difficulty: '),
-    skillSlo: tagnames
-      .filter(tag => tag.startsWith('es slo: '))
-      .map(tag => tag.substring(8))
-  };
-}
+module.exports = parseTags;

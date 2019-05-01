@@ -3,12 +3,12 @@ const fs = require('fs-extra'); // like node's 'fs', but with more methods and *
 const del = require('del');
 const config = require('../utilities/config');
 const extractMbz = require('../utilities/extract-mbz');
-const parseMetaFromTags = require('../utilities/parse-meta-from-tags');
 const parseCourse = require('../utilities/parse-course');
 const tarQuestion = require('../utilities/tar-question');
 const encodeQuestion = require('../utilities/encode-question');
 const uploadDocuments = require('../utilities/upload-document');
 const { sanitizeObject } = require('../utilities/sanitize-key');
+const validateTags = require('../utilities/validate-tags');
 
 async function parseAndSaveMbz(req, res) {
   // Create a temporary directory
@@ -27,11 +27,10 @@ async function parseAndSaveMbz(req, res) {
   await uploadDocuments(questionData.map(question => sanitizeObject(question)));
   
   //For each vpl in activites forlder, parse tags for validation
-  questions.forEach(function (file, index) {
+  await Promise.all(questions.map(async (file) => {
     var fromPath = dir + '/extracted/activities/' + file;
-    //console.log(fromPath);
-    parseMetaFromTags(fromPath);
-  });
+    await validateTags(fromPath);
+  }));
 
   // Remove the temporary directory
   await del(dir, { force: true });
