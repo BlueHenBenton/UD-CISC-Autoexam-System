@@ -67,29 +67,38 @@ cd UD-CISC-Autoexam-System/express-server
 The main file that controls the parse and upload process is stored under `./controllers/mbz-controller.js`. This file calls utilities stored in the `./utilities folder` to step through this process. The steps in this process are listed below.
 
 ### Utilities:
-__await-temp.js__
+_await-temp.js_
 Await temp creates a temporary directory for the work to be done in.
 
-__config.js__
+_config.js_
 Makes sure that the config file is in place and that the program has read access to the config file.
 
-__encode-questions.js__
+_encode-questions.js_
 Encode questions takes the individual questions from the `questions` folder of the .mbz file, and encodes each subfile for each question into a single json file, adding headers to separate each file.
 
-__extract-mbz.js__
+_extract-mbz.js_
 Extract MBZ extracts the uploaded mbz file (stored in a gzipped tar format) and places it into the temporary directory.
 
-__parse-course.js__
+_is-valid-api-key.js_
+Checks to see if the user has a valid API key. Used to limit access to the API
+
+_make-crud-from-mongo-schema.js_
+Creates an object containing helper functions to make crud operations out of mongoose models.
+
+_parse-course.js_
 Takes the path to an activity (an individual question), and produces information on the course that that question came from. 
 
-__parse-meta-from-tags.js__
+_parse-meta-from-tags.js_
 Consumes a path to an activity (an individual question), and produces the tags that are contained from that activity. If the tag found is not in the database, it logs an error to the console.
 
-__sanitize-key.js__
+_sanitize-key.js_
 Mongodb does not like json files with certain characters such as $, so we use different functions within sanitize-key to encode and decode these characters.
 
-__tar-question.js__
+_tar-question.js_
 Extracts the MBZ file to the temporary directory
 
-__upload-document.js__
+_upload-document.js_
 Upload document takes the encoded, sanitized json question objects and uploads them to a Mongo Database. The name of this database and the name of the collection within the database can be set from the file `/express-server/config-template-json`
+
+_validate-tags.js__
+Checks to see if tags marked required in the Mongodb tags schema are present in the document. Also checks to make sure all tags in the mbz file are present in the database.
