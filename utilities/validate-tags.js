@@ -25,4 +25,14 @@ module.exports = async function(question) {
             console.warn(`Warning: missing tag: "${expected.name}"`);
         }
     });
+
+    // Make sure tag has a valid value
+    actualTags.forEach(actual => {
+        const tag = expectedTags.find(expected => expected.name === actual.name);
+        if(tag && tag.enum){
+            if(!tag.enum.includes(actual.value)){
+                console.warn(`Warning: invalid value "${actual.value}" for tag: "${actual.name}"`);
+            }
+        }
+    });
 }
