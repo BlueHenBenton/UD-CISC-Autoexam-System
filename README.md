@@ -18,7 +18,7 @@ This project is an API to turn VPL .mbz files from moodle into json objects to s
 
 ## Script Deployment
 
-The script copies `config-template.json` to the install directory defined at the top of the script, and then calls the makefile to install the server. The script must be run as root.
+The script `install_server.sh` copies `config-template.json` to the install directory defined at the top of the script, and then calls the makefile to install the server. The script must be run as root.
 
 ### Install:
 ```bash
@@ -71,7 +71,8 @@ _await-temp.js_
 Await temp creates a temporary directory for the work to be done in.
 
 _config.js_
-Makes sure that the config file is in place and that the program has read access to the config file.
+Makes sure that the config file is in place and that the program has read access to the config file, and returns its contents.
+Use `const config = require('utilities/config');` to set `config` to the contents of the config file.
 
 _encode-questions.js_
 Encode questions takes the individual questions from the `questions` folder of the .mbz file, and encodes each subfile for each question into a single json file, adding headers to separate each file.
@@ -92,13 +93,13 @@ _parse-meta-from-tags.js_
 Consumes a path to an activity (an individual question), and produces the tags that are contained from that activity. If the tag found is not in the database, it logs an error to the console.
 
 _sanitize-key.js_
-Mongodb does not like json files with certain characters such as $, so we use different functions within sanitize-key to encode and decode these characters.
+Mongodb does not like json files with certain characters such as `.` and `$`, so we use different functions within sanitize-key to encode and decode these characters.
 
 _tar-question.js_
 Extracts the MBZ file to the temporary directory
 
 _upload-document.js_
-Upload document takes the encoded, sanitized json question objects and uploads them to a Mongo Database. The name of this database and the name of the collection within the database can be set from the file `/express-server/config-template-json`
+Upload document takes the encoded, sanitized json question objects and uploads them to a Mongo Database. The name of this database and the name of the collection within the database can be set from the file `/config.json`
 
 _validate-tags.js__
-Checks to see if tags marked required in the Mongodb tags schema are present in the document. Also checks to make sure all tags in the mbz file are present in the database.
+Performs tag validation on a question, according to the validation rules in the database.
