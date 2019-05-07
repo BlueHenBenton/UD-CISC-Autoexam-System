@@ -30,8 +30,8 @@ module.exports = async function(question) {
     let count = 0;
     expectedTags.filter(expected => !expected.allowMulti).forEach(expected => {
         if (actualTags.filter(actual => actual.name === expected.name).length > 1){
-              console.warn(`Warning: duplicate tag: "${actual.name}"`);
-                                                      }
-                      });
+              console.warn(`Warning: duplicate tag: "${expected.name}"`);
+        }
+    });
     
 }
