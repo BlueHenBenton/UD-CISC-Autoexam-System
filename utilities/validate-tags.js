@@ -25,4 +25,13 @@ module.exports = async function(question) {
             console.warn(`Warning: missing tag: "${expected.name}"`);
         }
     });
+    
+    // Check for duplicate tags for certain types of tags
+    let count = 0;
+    expectedTags.filter(expected => !expected.allowMulti).forEach(expected => {
+        if (actualTags.filter(actual => actual.name === expected.name).length > 1){
+              console.warn(`Warning: duplicate tag: "${actual.name}"`);
+                                                      }
+                      });
+    
 }
