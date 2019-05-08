@@ -4,6 +4,7 @@ const asyncHandler = require('express-async-handler');
 const isValidApiKey = require('./utilities/is-valid-api-key');
 const { MbzController, TagController, ApiKeyController } = require('./controllers');
 
+/** A function that adds routing to the given app */
 module.exports = function(app) {
   app.use(cors());
   // Add API-key restriction to *all* endpoints

@@ -95,9 +95,6 @@ Consumes a path to an activity (an individual question), and produces the tags t
 _sanitize-key.js_
 Mongodb does not like json files with certain characters such as `.` and `$`, so we use different functions within sanitize-key to encode and decode these characters.
 
-_tar-question.js_
-Extracts the MBZ file to the temporary directory
-
 _upload-document.js_
 Upload document takes the encoded, sanitized json question objects and uploads them to a Mongo Database. The name of this database and the name of the collection within the database can be set from the file `/config.json`
 

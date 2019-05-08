@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const xml2js = require('xml2js');
 
+/** Promisifies `(new xml2js.Parser()).parseString(...)` */
 function encode(str) {
     return new Promise((resolve, reject) => {
         (new xml2js.Parser()).parseString(str, (err, data) => {
@@ -10,6 +11,7 @@ function encode(str) {
     });
 }
 
+/** Given the path to a folder, it takes all files in that folder and encodes them into a object. `.xml` files are encoded with xml2js. */
 module.exports = async function encodeQuestion(dir) {
     // What files are there?
     const files = await fs.readdir(dir);

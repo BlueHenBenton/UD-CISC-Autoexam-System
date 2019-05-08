@@ -1,15 +1,13 @@
 const awaitTemp = require('../utilities/await-temp');
 const fs = require('fs-extra'); // like node's 'fs', but with more methods and *promise support*.
 const del = require('del');
-const config = require('../utilities/config');
 const extractMbz = require('../utilities/extract-mbz');
-const parseCourse = require('../utilities/parse-course');
-const tarQuestion = require('../utilities/tar-question');
 const encodeQuestion = require('../utilities/encode-question');
 const uploadDocuments = require('../utilities/upload-document');
 const { sanitizeObject } = require('../utilities/sanitize-key');
 const validateTags = require('../utilities/validate-tags');
 
+/** Take the given MBZ file, extract it, validate it, and upload it. */
 async function parseAndSaveMbz(req, res) {
   // Create a temporary directory
   const dir = await awaitTemp.mkdir();
@@ -38,6 +36,7 @@ async function parseAndSaveMbz(req, res) {
   res.json(questionData);
 }
 
+// Expose the function to whoever imports this module
 module.exports = {
   parseAndSaveMbz
 }
