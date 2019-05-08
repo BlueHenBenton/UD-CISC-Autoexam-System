@@ -1,8 +1,11 @@
 const parseTags = require('./parse-tags');
 const Tag = require('../models/tag');
 
+/** Look at the tags in the given question, and validate them against the rules in the db. */
 module.exports = async function(question) {
+    // Parse the tags from the question
     const actualTags = (await parseTags(question)).map(
+        // Split them by ': ' into name and value.
         data => ({
             name: data.name.substr(0, data.name.indexOf(': ')),
             value: data.name.substr(data.name.indexOf(': ') + 2)
