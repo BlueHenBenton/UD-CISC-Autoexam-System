@@ -1,7 +1,6 @@
 {
   "port": 2468,
-  "saveDirectory": "storage/activities",
-  "dbName": "autoexam",
+  "connectionString": "mongodb://localhost:27017/autoexam",
   "questionsCollection": "questions",
   "tagsCollection": "tags",
   "apiKeysCollection": "api_keys",
